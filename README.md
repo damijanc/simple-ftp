@@ -6,6 +6,7 @@ Simple wrapper for PHP (http://php.net/manual/en/book.ftp.php) FTP
 Motivation for this class was to simplify usage of FTP
 so instead of doing:
 
+<pre>
 $conn = ftp_connect($host, $port, $timeout);
 if ($conn) {
   $login_result = ftp_login($conn, $user, $password);
@@ -13,12 +14,14 @@ if ($conn) {
           $connected = TRUE;
   }
 }
+</pre>
 
 We simply do 
 
+<pre>
 $ftp = new SimpleFtp($host, $port, $user, $password);
 $ftp->connect();
-
+</pre>
 
 In addition we can use shell commands like:
 
@@ -30,6 +33,7 @@ get - download file
 
 Example:
 
+<pre>
 $file = '/tmp/myfile.zip';
 
 //connect to server
@@ -43,6 +47,7 @@ $ftp->put($file);
 $ftp->ls();
 //end session
 $ftp->disconnect();
+</pre>
 
 TODO:
 
