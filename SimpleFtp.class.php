@@ -1,10 +1,24 @@
 <?php 
+/*
+   Copyright 2013 Damijan Cavar
 
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
 class SimpleFtp {
 
   private $conn;
   private $host;
-  private $port;
+  private $port = 21;
   private $user;
   private $password;
   private $timeout = 5;
@@ -13,15 +27,18 @@ class SimpleFtp {
 
   /**
    *
-   * @param type $host host string ftp.example.net/path1/path2
-   * @param type $user username if any
-   * @param type $password password if any
    */
-  public function __construct ($host, $port = 21, $user = null, $password = null) {
-    $this->host = $host;
-    $this->user = $user;
-    $this->port = $port;
-    $this->password = $password;
+  public function __construct ($options) {
+    if (is_array($options)) {
+      if (array_key_exists('server', $options))
+        $this->host = $options['server'];
+      if (array_key_exists('user', $options))
+        $this->user = $options['user'];
+      if (array_key_exists('port', $options))
+        $this->port = $options['port'];
+      if (array_key_exists('pass', $options))
+        $this->password = $options['pass'];
+    }
   }
 
   public function set_timeout ($t = 5) {
@@ -71,6 +88,28 @@ class SimpleFtp {
     throw new Exception('Failed to connect');
   }
 
+  function ftp_parse_response ($response, &$errstr) {
+    if (!is_array($response)) {
+      $errstr = 'Parameter \$response must be an array';
+      return false;
+    }
+
+    foreach ($response as $r) {
+      $code = substr(trim($r), 0, 3);
+
+      if (!is_numeric($code)) {
+        $errstr = "$code is not a valid FTP code";
+      }
+
+      if ($code > 400) {
+        $errstr = $r;
+        return false;
+      }
+    }
+
+    return true;
+  }
+
   public function disconnect () {
     ftp_quit($this->conn);
     $this->connected = FALSE;
@@ -107,6 +146,50 @@ class SimpleFtp {
     }
   }
 
+  public function mv ($old_file, $new_file) {
+    if (!$this->connected)
+      throw new Exception('You are not connected');
+    if (ftp_rename($this->conn, $old_file, $new_file)) {
+      return TRUE;
+    }
+    else {
+      return FALSE;
+    }
+  }
+
+  public function rm ($file) {
+    if (!$this->connected)
+      throw new Exception('You are not connected');
+    if (ftp_delete($this->conn, $file)) {
+      return TRUE;
+    }
+    else {
+      return FALSE;
+    }
+  }
+
+  public function rmdir ($folder) {
+    if (!$this->connected)
+      throw new Exception('You are not connected');
+    if (ftp_rmdir($this->conn, $folder)) {
+      return TRUE;
+    }
+    else {
+      return FALSE;
+    }
+  }
+
+  public function chmod ($mode,$file) {
+    if (!$this->connected)
+      throw new Exception('You are not connected');
+
+    if (ftp_chmod($this->conn, $mode, $file) !== false) {
+      return TRUE;
+    }
+    else {
+      return FALSE;
+    }
+  }
   public function mkdir ($folder) {
     if (!$this->connected)
       throw new Exception('You are not connected');
