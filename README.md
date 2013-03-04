@@ -16,7 +16,7 @@ if ($conn) {
 }
 </pre>
 
-We simply do 
+We simply do
 
 <pre>
 $ftp = new SimpleFtp($host, $port, $user, $password);
@@ -34,15 +34,20 @@ get - download file
 Example:
 
 <pre>
-$file = '/tmp/myfile.zip';
+
+$options = array;
+$options['server'] = 'ftp.example.com';
+$options['port'] = 21;
+$options['user'] = 'user';
+$options['pass'] = 'password';
 
 //connect to server
-$ftp = new SimpleFtp('ftp.example.com', $port = 21, 'user', 'pass');
+$ftp = new SimpleFtp($options);
 $ftp->connect();
 //got to folder
 $ftp->cd('Folder1');
 //upload file
-$ftp->put($file);
+$ftp->put('file1.zip');
 //list content
 $ftp->ls();
 //end session
@@ -54,4 +59,5 @@ TODO:
 - add delete support
 - add multiple file/folder upload
 - add upload/download progress display
+- fix code comments
 ...
