@@ -26,7 +26,7 @@ class SimpleFtp {
   private $transfer_mode = FTP_BINARY;
 
   /**
-   *
+   * Constructor
    */
   public function __construct ($options) {
     if (is_array($options)) {
