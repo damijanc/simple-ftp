@@ -56,7 +56,6 @@ $ftp->disconnect();
 
 TODO:
 
-- add delete support
 - add multiple file/folder upload
 - add upload/download progress display
 - fix code comments
