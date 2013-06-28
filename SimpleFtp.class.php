@@ -125,7 +125,7 @@ class SimpleFtp {
       }
     }
 
-    return FALSE;
+    throw new Exception('Unable to cd to folder.');
   }
 
   public function pwd () {
@@ -153,7 +153,7 @@ class SimpleFtp {
       return TRUE;
     }
     else {
-      return FALSE;
+	throw new Exception('Unable to mv.');
     }
   }
 
@@ -164,7 +164,7 @@ class SimpleFtp {
       return TRUE;
     }
     else {
-      return FALSE;
+	throw new Exception('Unable to rm.');
     }
   }
 
@@ -175,7 +175,7 @@ class SimpleFtp {
       return TRUE;
     }
     else {
-      return FALSE;
+	throw new Exception('Unable to rmdir.');
     }
   }
 
@@ -187,12 +187,13 @@ class SimpleFtp {
       return TRUE;
     }
     else {
-      return FALSE;
+	throw new Exception('Unable to change chmod .');
     }
   }
   public function mkdir ($folder) {
     if (!$this->connected)
       throw new Exception('You are not connected');
+
     ftp_mkdir($this->conn, $folder);
   }
 
@@ -219,12 +220,13 @@ class SimpleFtp {
       $ret = ftp_nb_continue($this->conn);
     }
     if ($ret != FTP_FINISHED) {
-      echo "There was an error downloading the file...";
-      exit(1);
+      throw new Exception('There was an error uploading file...');	
     }
 
     // close filepointer
     fclose($fp);
+
+    return TRUE;
   }
 
   public function get ($file, $remote_location) {
@@ -241,12 +243,13 @@ class SimpleFtp {
       $ret = ftp_nb_continue($this->conn);
     }
     if ($ret != FTP_FINISHED) {
-      echo "There was an error downloading the file...";
-      exit(1);
+      throw new Exception("There was an error downloading the file...");
     }
 
     // close filepointer
     fclose($fp);
+
+    return TRUE;
   }
 
 }
