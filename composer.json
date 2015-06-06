@@ -1,0 +1,24 @@
+{
+    "name": "damijanc/simple-ftp",
+    "description": "Simple FTP wrapper",
+    "type": "library",
+    "require": {
+	    "php": ">=5.3",
+        "ext-ftp": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^4.7"
+    },
+    "license": "Apache2",
+    "authors": [
+        {
+            "name": "Damijan Cavar",
+            "email": "damijan@cavar.si"
+        }
+    ],
+    "autoload": {
+      "psr-4": {
+        "damijanc\\FTP": "src/"
+      }
+  }
+}

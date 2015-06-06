@@ -14,7 +14,10 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-class SimpleFtp {
+
+namespace damijanc\FTP;
+
+class Client {
 
   private $conn;
   private $host;
