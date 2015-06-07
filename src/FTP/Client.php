@@ -150,9 +150,7 @@ class Client
         }
 
         if ($arr = $this->adapter->ftp_nlist($this->conn, '.')) {
-            foreach ($arr as $file) {
-                echo $file . "\n";
-            }
+          return $arr;
         }
     }
 
