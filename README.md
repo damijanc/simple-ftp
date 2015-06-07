@@ -8,7 +8,7 @@ Simple wrapper for PHP (http://php.net/manual/en/book.ftp.php) FTP
 Motivation for this class was to simplify usage of FTP
 so instead of doing:
 
-<pre>
+```PHP
 $conn = ftp_connect($host, $port, $timeout);
 if ($conn) {
   $login_result = ftp_login($conn, $user, $password);
@@ -16,14 +16,18 @@ if ($conn) {
           $connected = TRUE;
   }
 }
-</pre>
+```
 
 We simply do
 
-<pre>
-$ftp = new SimpleFtp($host, $port, $user, $password);
+
+```PHP
+use damijanc\FTP\Client;
+
+$ftp = new Client($options);
 $ftp->connect();
-</pre>
+
+```
 
 In addition we can use shell commands like:
 
@@ -32,10 +36,10 @@ put -upload a file
 ls - list directory
 get - download file
 
-
 Example:
 
-<pre>
+```PHP
+use damijanc\FTP\Client;
 
 $options = array;
 $options['server'] = 'ftp.example.com';
@@ -44,7 +48,7 @@ $options['user'] = 'user';
 $options['pass'] = 'password';
 
 //connect to server
-$ftp = new SimpleFtp($options);
+$ftp = new Client($options);
 $ftp->connect();
 //got to folder
 $ftp->cd('Folder1');
@@ -54,7 +58,13 @@ $ftp->put('file1.zip');
 $ftp->ls();
 //end session
 $ftp->disconnect();
-</pre>
+```
+
+Installation:
+
+```
+composer require damijanc/simple-ftp
+```
 
 TODO:
 
