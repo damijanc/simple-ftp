@@ -1,3 +1,5 @@
+![Travis status]
+(https://travis-ci.org/damijanc/simple-ftp.svg?branch=master)
 simple-ftp
 ==========
 
