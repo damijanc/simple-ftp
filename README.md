@@ -31,10 +31,12 @@ $ftp->connect();
 
 In addition we can use shell commands like:
 
+```
 cd  -change dir
 put -upload a file
 ls - list directory
 get - download file
+```
 
 Example:
 
