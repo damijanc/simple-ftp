@@ -150,7 +150,7 @@ class Client
             throw new \Exception('You are not connected');
         }
         $s = $this->adapter->ftp_pwd($this->conn);
-        echo $s ? "$s\n" : "Can't query folder. \n";
+        return $s ? "$s\n" : "Can't query folder. \n";
     }
 
     public function ls()
@@ -224,8 +224,6 @@ class Client
 
     public function put($file)
     {
-
-
         if (!$this->connected) {
             throw new \Exception('You are not connected');
         }
