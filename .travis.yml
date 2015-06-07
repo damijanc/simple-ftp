@@ -9,6 +9,4 @@ before_script:
     - composer install
 
 env:
-  - FTP_SERVER ftp.example.com
-  - FTP_USER sk
-  - FTP_PASSWORD secret
+  - FTP_SERVER ftp.example.com FTP_USER sk FTP_PASSWORD secret
