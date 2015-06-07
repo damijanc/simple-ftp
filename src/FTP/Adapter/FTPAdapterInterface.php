@@ -35,5 +35,7 @@ interface FTPAdapterInterface
 
     public function ftp_nb_fget($conn, $fp, $file, $mode);
 
+    public function ftp_pasv($ftp_connection,$pasv);
+
 
 }

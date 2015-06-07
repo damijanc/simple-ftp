@@ -29,6 +29,7 @@ class Client
     private $timeout = 5;
     private $connected = false;
     private $transfer_mode = FTP_BINARY;
+    private $passive = true;
 
     /**
      * @var FTPAdapterInterface
@@ -52,6 +53,9 @@ class Client
             }
             if (array_key_exists('pass', $options)) {
                 $this->password = $options['pass'];
+            }
+            if (array_key_exists('passive', $options)) {
+                $this->passive = $options['passive'];
             }
         }
 
@@ -100,9 +104,15 @@ class Client
             $this->conn = $this->adapter->ftp_connect($this->host, $this->port, $this->timeout);
 
             if ($this->conn) {
+
                 // Open a session to an external ftp site
                 $login_result = $this->adapter->ftp_login($this->conn, $this->user, $this->password);
                 if ($login_result) {
+
+                    if ($this->passive) {
+                        $this->adapter->ftp_pasv($this->conn, $this->passive);
+                    }
+                    
                     $this->connected = true;
                     return true;
                 }
