@@ -59,7 +59,7 @@ class Client
             }
         }
 
-        if ($adapter == null) {
+        if ($adapter === null) {
             $this->adapter = new Adapter\FTPAdapter();
         } else {
             $this->adapter = $adapter;
@@ -99,7 +99,7 @@ class Client
     {
         $this->check_variables();
 
-        if ($this->connected == false) {
+        if ($this->connected === false) {
 
             $this->conn = $this->adapter->ftp_connect($this->host, $this->port, $this->timeout);
 
@@ -136,7 +136,7 @@ class Client
         }
 
         if (ftp_pwd($this->conn) != $folder) {
-            if (ftp_chdir($this->conn, $folder) != false) {
+            if (ftp_chdir($this->conn, $folder) !== false) {
                 return true;
             }
         }
