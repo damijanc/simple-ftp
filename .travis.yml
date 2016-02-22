@@ -10,3 +10,4 @@ before_script:
 
 env:
   - FTP_SERVER ftp.example.com FTP_USER sk FTP_PASSWORD secret
+  
