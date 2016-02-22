@@ -224,8 +224,6 @@ class Client
 
     public function put($file)
     {
-
-
         if (!$this->connected) {
             throw new \Exception('You are not connected');
         }
@@ -281,6 +279,5 @@ class Client
 
         return true;
     }
-
 }
 
