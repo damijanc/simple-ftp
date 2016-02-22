@@ -240,7 +240,7 @@ class Client
 
         $path_parts = pathinfo($file);
 
-        $ret = $this->adapter->ftp_nb_fput($this->conn, $path_parts['basename'], $fp, FTP_BINARY);
+        $ret = $this->adapter->ftp_nb_fput($this->conn, $path_parts['basename'], $fp, $this->transfer_mode);
         while ($ret == FTP_MOREDATA) {
 
             // We could print some progress bar since we are not blocking
@@ -265,7 +265,7 @@ class Client
         //open file pointer
         $fp = fopen($file, 'w');
 
-        $ret = $this->adapter->ftp_nb_fget($this->conn, $fp, $file, FTP_BINARY);
+        $ret = $this->adapter->ftp_nb_fget($this->conn, $fp, $file, $this->transfer_mode);
         while ($ret == FTP_MOREDATA) {
 
             // We could print some progress bar since we are not blocking
