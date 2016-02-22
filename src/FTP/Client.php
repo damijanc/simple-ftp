@@ -265,7 +265,7 @@ class Client
         //open file pointer
         $fp = fopen($file, 'w');
 
-        $ret = $this->adapter->ftp_nb_fget($this->conn, $fp, $file, $this->transfer_mode);
+        $ret = $this->adapter->ftp_nb_fget($this->conn, $fp, $remote_location, $this->transfer_mode);
         while ($ret == FTP_MOREDATA) {
 
             // We could print some progress bar since we are not blocking
@@ -284,4 +284,3 @@ class Client
 
 }
 
-?>
