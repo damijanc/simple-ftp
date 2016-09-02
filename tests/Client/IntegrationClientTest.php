@@ -2,7 +2,6 @@
 
 namespace damijanc\FTP\Tests;
 
-
 use damijanc\FTP\Client;
 
 /**
@@ -26,23 +25,14 @@ class IntegrationClientTest extends \PHPUnit_Framework_TestCase {
     public function testClient()  {
 
         $client = new Client($this->getOptions());
-
         $client->connect();
-
         $client->cd('pub');
-
         $client->put(__DIR__ . '/Resources/dummy.gif');
-
         $contents = $client->ls();
-
         $this->assertContains("dummy.gif", $contents);
-
         $client->rm("dummy.gif");
-
         $contents = $client->ls();
-
-        $this->assertEquals(null,$contents);
-
+        $this->assertEquals(null, $contents);
     }
 
 }
