@@ -5,14 +5,12 @@ namespace damijanc\FTP\Tests;
 use damijanc\FTP\Client;
 use damijanc\FTP\Adapter\FTPAdapterInterface;
 
-
 /**
  * @group unit
  * Class ClientTest
  */
 class ClientTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * @var FTPAdapterInterface
      */
@@ -64,9 +62,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
     public function testConnect()
     {
-
         $ftp = new Client($this->getOptions(),$this->getAdapter());
         $this->assertEquals($ftp->connect(), true);
     }
-
 }
