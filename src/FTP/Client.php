@@ -20,7 +20,6 @@ use damijanc\FTP\Adapter\FTPAdapterInterface;
 
 class Client
 {
-
     private $conn;
     private $host;
     private $port = 21;
@@ -66,6 +65,9 @@ class Client
         }
     }
 
+    /**
+     * @param int $t
+     */
     public function set_timeout($t = 5)
     {
         if (is_numeric($t) && $t >= 1) {
@@ -73,6 +75,9 @@ class Client
         }
     }
 
+    /**
+     * @throws \Exception
+     */
     private function check_variables()
     {
         if (empty($this->host)) {
@@ -90,11 +95,18 @@ class Client
         }
     }
 
+    /**
+     * @param int $m
+     */
     public function transfer_mode($m = FTP_BINARY)
     {
         $this->transfer_mode = $m;
     }
 
+    /**
+     * @return bool
+     * @throws \Exception
+     */
     public function connect()
     {
         $this->check_variables();
@@ -129,6 +141,11 @@ class Client
         $this->connected = false;
     }
 
+    /**
+     * @param $folder
+     * @return bool
+     * @throws \Exception
+     */
     public function cd($folder)
     {
         if (!$this->connected) {
@@ -164,6 +181,12 @@ class Client
         }
     }
 
+    /**
+     * @param $old_file
+     * @param $new_file
+     * @return bool
+     * @throws \Exception
+     */
     public function mv($old_file, $new_file)
     {
         if (!$this->connected) {
@@ -176,6 +199,11 @@ class Client
         }
     }
 
+    /**
+     * @param $file
+     * @return bool
+     * @throws \Exception
+     */
     public function rm($file)
     {
         if (!$this->connected) {
@@ -188,6 +216,11 @@ class Client
         }
     }
 
+    /**
+     * @param $folder
+     * @return bool
+     * @throws \Exception
+     */
     public function rmdir($folder)
     {
         if (!$this->connected) {
@@ -200,6 +233,12 @@ class Client
         }
     }
 
+    /**
+     * @param $mode
+     * @param $file
+     * @return bool
+     * @throws \Exception
+     */
     public function chmod($mode, $file)
     {
         if (!$this->connected) {
@@ -213,6 +252,10 @@ class Client
         }
     }
 
+    /**
+     * @param $folder
+     * @throws \Exception
+     */
     public function mkdir($folder)
     {
         if (!$this->connected) {
@@ -222,6 +265,11 @@ class Client
         $this->adapter->ftp_mkdir($this->conn, $folder);
     }
 
+    /**
+     * @param $file
+     * @return bool
+     * @throws \Exception
+     */
     public function put($file)
     {
         if (!$this->connected) {
@@ -255,6 +303,12 @@ class Client
         return true;
     }
 
+    /**
+     * @param $file
+     * @param $remote_location
+     * @return bool
+     * @throws \Exception
+     */
     public function get($file, $remote_location)
     {
         if (!$this->connected) {
