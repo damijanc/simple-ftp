@@ -1,5 +1,4 @@
-![Travis status]
-(https://travis-ci.org/damijanc/simple-ftp.svg?branch=master)
+[![Build Status](https://travis-ci.org/damijanc/simple-ftp.svg?branch=master)](https://travis-ci.org/damijanc/simple-ftp)
 simple-ftp
 ==========
 
