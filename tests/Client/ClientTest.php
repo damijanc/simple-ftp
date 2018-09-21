@@ -21,8 +21,8 @@ class ClientTest extends \PHPUnit_Framework_TestCase
      */
     private $options;
 
-    private function getAdapter() {
-
+    private function getAdapter()
+    {
         $this->options = $this->getOptions();
 
         $adapter = $this->getMockBuilder('damijanc\FTP\Adapter\FTPAdapterInterface')
@@ -32,16 +32,19 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $adapter
             ->expects($this->once())
             ->method('ftp_connect')
-            ->with($this->equalTo($this->options['server']),
+            ->with(
+                $this->equalTo($this->options['server']),
                 $this->equalTo($this->options['port']),
-                $this->equalTo(5))
+                $this->equalTo(5)
+            )
             ->will($this->returnValue('c'));
 
         //ftp_login($this->conn, $this->user, $this->password);
         $adapter
             ->expects($this->once())
             ->method('ftp_login')
-            ->with($this->equalTo('c'),
+            ->with(
+                $this->equalTo('c'),
                 $this->equalTo('user'),
                 $this->equalTo('password')
             )
@@ -50,7 +53,8 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         return $adapter;
     }
 
-    private function getOptions() {
+    private function getOptions()
+    {
         $options = array();
         $options['server'] = 'ftp.example.com';
         $options['port'] = 21;
@@ -62,7 +66,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
     public function testConnect()
     {
-        $ftp = new Client($this->getOptions(),$this->getAdapter());
+        $ftp = new Client($this->getOptions(), $this->getAdapter());
         $this->assertEquals($ftp->connect(), true);
     }
 }

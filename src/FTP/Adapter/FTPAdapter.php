@@ -2,15 +2,14 @@
 
 namespace damijanc\FTP\Adapter;
 
-
 /**
  * Purpose of this class is to isolate library from native functions so that library is testable
  *
  * Class FTPAdapter
  * @package damijanc\FTP
  */
-class FTPAdapter implements FTPAdapterInterface {
-
+class FTPAdapter implements FTPAdapterInterface
+{
     public function ftp_connect($host, $port, $timeout)
     {
         return ftp_connect($host, $port, $timeout);

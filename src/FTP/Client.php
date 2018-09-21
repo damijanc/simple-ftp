@@ -112,7 +112,6 @@ class Client
         $this->check_variables();
 
         if ($this->connected === false) {
-
             $this->conn = $this->adapter->ftp_connect($this->host, $this->port, $this->timeout);
 
             if ($this->conn) {
@@ -120,7 +119,6 @@ class Client
                 // Open a session to an external ftp site
                 $login_result = $this->adapter->ftp_login($this->conn, $this->user, $this->password);
                 if ($login_result) {
-
                     if ($this->passive) {
                         $this->adapter->ftp_pasv($this->conn, $this->passive);
                     }
@@ -177,7 +175,7 @@ class Client
         }
 
         if ($arr = $this->adapter->ftp_nlist($this->conn, '.')) {
-          return $arr;
+            return $arr;
         }
     }
 
@@ -334,4 +332,3 @@ class Client
         return true;
     }
 }
-

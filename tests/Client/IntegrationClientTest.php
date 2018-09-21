@@ -9,9 +9,10 @@ use damijanc\FTP\Client;
  * Class IntegrationClientTest
  * @package damijanc\FTP\Tests
  */
-class IntegrationClientTest extends \PHPUnit_Framework_TestCase {
-
-    private function getOptions() {
+class IntegrationClientTest extends \PHPUnit_Framework_TestCase
+{
+    private function getOptions()
+    {
         $options = array();
         $options['server'] = getenv('FTP_SERVER');
         $options['port'] = 21;
@@ -22,8 +23,8 @@ class IntegrationClientTest extends \PHPUnit_Framework_TestCase {
     }
 
 
-    public function testClient()  {
-
+    public function testClient()
+    {
         $client = new Client($this->getOptions());
         $client->connect();
         $client->cd('pub');
@@ -34,5 +35,4 @@ class IntegrationClientTest extends \PHPUnit_Framework_TestCase {
         $contents = $client->ls();
         $this->assertEquals(null, $contents);
     }
-
 }
